@@ -11,3 +11,6 @@ config.json
 
 # Optional eslint cache
 .eslintcache
+
+# Webstorm
+.idea
