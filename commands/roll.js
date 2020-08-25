@@ -1,23 +1,23 @@
 const diceRoller = require('rpg-dice-roller');
+const dice = new diceRoller.DiceRoller();
 
 module.exports = {
 	name: 'roll',
 	description: 'Executes a command given in dice notation, and returns the results.\nSee https://greenimp.github.io/rpg-dice-roller/guide/notation/ for more information about dice notation.',
 	usage: '[dice-notation]',
-	args: true,
 	execute(message, args) {
+		if (!args[0]) return message.reply('Please specify a dice type e.g., 1d6, 2d5 + 1d7 etc.');
 
-		const dice = new diceRoller.DiceRoller();
+		try{
+			dice.roll(args.join(''));
 
-		const input = args.toString().replace(/,/g, '');
+			const result = dice.log.shift();
 
-		dice.roll(input);
-
-		const result = dice.log.shift();
-
-		const reply = `${message.author} rolled**${result.toString().substring(result.toString().indexOf(':') + 1)}**`;
-
-		return message.channel.send(reply).catch(console.error);
+			return message.channel.send(`${message.author} rolled**${result.toString().substring(result.toString().indexOf(':') + 1)}**`);
+		}
+		catch (err) {
+			message.reply('Wrong dice notation please use a valid notation.');
+		}
 
 	},
 };

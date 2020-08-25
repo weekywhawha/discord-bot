@@ -2,7 +2,6 @@ module.exports = {
 	name: 'clear',
 	description: 'Purge up to 99 messages.',
 	usage: '[number]',
-	args: true,
 	execute(message, args) {
 		const amount = parseInt(args[0]) + 1;
 

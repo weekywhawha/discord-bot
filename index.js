@@ -30,11 +30,11 @@ client.on('message', message => {
 	if (!command) return;
 
 	if (command.guildOnly && message.channel.type === 'dm') {
-		return message.reply('I can\'t excute that command inside DMs!');
+		return message.reply('I can\'t execute that command inside DMs!');
 	}
 
 	if (command.args && !args.length) {
-		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+		return message.reply(`You didn't provide any arguments, ${message.author}!`);
 	}
 
 	if (!cooldowns.has(command.name)) {
