@@ -8,7 +8,7 @@ module.exports = {
 	execute(message, args) {
 		weather.find({ search: args.join(''), degreeType: 'C' }, function(error, result) {
 			if(error) return message.reply('Please specify a location.');
-			if(result === undefined || result.length === 0) return message.channel.send('Invalid location.');
+			if(result === undefined || result.length === 0) return message.reply('Invalid location.');
 
 			const current = result[0].current;
 			const location = result[0].location;

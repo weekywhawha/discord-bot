@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Executes a command given in dice notation, and returns the results.\nSee https://greenimp.github.io/rpg-dice-roller/guide/notation/ for more information about dice notation.',
 	usage: '[dice-notation]',
 	execute(message, args) {
-		if (!args[0]) return message.reply('Please specify a dice type e.g., 1d6, 2d5 + 1d7 etc.');
+		if (!args[0]) return message.reply('Please specify a dice type e.g., "1d6", "2d5 + 1d7", etc.');
 
 		try{
 			dice.roll(args.join(''));
