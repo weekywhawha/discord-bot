@@ -22,11 +22,14 @@ module.exports = {
 
 				);
 
+				const itemPrice = await page.evaluate(
+					() => document.querySelector('div[class="barter-group-items"]').innerText,
+				);
+
 				const lootInfo = new Discord.MessageEmbed()
 					.setDescription('**S TIER LOOT**')
-					.addField(`${price.split('\n').splice(0, 1)}`, lootItems.slice(0, 27));
-
-				console.log(price);
+					.addField(`${price.split('\n').splice(0, 1)}`, lootItems.slice(0, 27), true)
+					.addField('Value', itemPrice.replace(/^Value:|^Per slot:.*\n?/gm, ''), true);
 
 				await browser.close();
 				return message.channel.send(lootInfo);
