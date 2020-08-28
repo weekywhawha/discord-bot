@@ -33,11 +33,11 @@ module.exports = {
 
 
 					const lootInfo = new Discord.MessageEmbed()
-						.setDescription('**Flea Market Prices 📈**')
+						.setTitle('**Flea Market Prices 📈**')
 						.addField('\u200b\nItems\n\u200b', items.map(str => str.substring(0, 40)), true)
 						.addField('Avg price (24h) \nPer slot\n\u200b', avgPrice, true)
 						.addField('\u200b', '\u200b', false)
-						.setFooter('source: tarkov-market.com ', 'https://images.discordapp.net/avatars/675451616865943552/d854b2b1a02fbb4c4b5eea47f9840caf.png?size=512');
+						.setFooter('source: tarkov-market.com ', 'https://tarkov-market.com/favicon-32x32.png');
 
 					await browser.close();
 					return message.channel.send(lootInfo);
@@ -70,11 +70,11 @@ module.exports = {
 
 
 					const lootInfo = new Discord.MessageEmbed()
-						.setDescription('**Barter Prices 🤝**')
+						.setTitle('**Barter Prices 🤝**')
 						.addField('\u200b\nItems\n\u200b', items.map(str => str.substring(0, 40)), true)
 						.addField('Avg price (24h) \nPer slot\n\u200b', avgPrice, true)
 						.addField('\u200b', '\u200b', false)
-						.setFooter('source: tarkov-market.com ', 'https://images.discordapp.net/avatars/675451616865943552/d854b2b1a02fbb4c4b5eea47f9840caf.png?size=512');
+						.setFooter('source: tarkov-market.com ', 'https://tarkov-market.com/favicon-32x32.png');
 
 					await browser.close();
 					return message.channel.send(lootInfo);
@@ -107,11 +107,11 @@ module.exports = {
 
 
 					const lootInfo = new Discord.MessageEmbed()
-						.setDescription('**Key Prices 🔑**')
+						.setTitle('**Key Prices 🔑**')
 						.addField('\u200b\nItems\n\u200b', items.map(str => str.substring(0, 40)), true)
 						.addField('Avg price (24h) \nPer slot\n\u200b', avgPrice, true)
 						.addField('\u200b', '\u200b', false)
-						.setFooter('source: tarkov-market.com ', 'https://images.discordapp.net/avatars/675451616865943552/d854b2b1a02fbb4c4b5eea47f9840caf.png?size=512');
+						.setFooter('source: tarkov-market.com ', 'https://tarkov-market.com/favicon-32x32.png');
 
 					await browser.close();
 					return message.channel.send(lootInfo);
@@ -141,12 +141,9 @@ module.exports = {
 					const newDate = await page.evaluate(
 						() => Array.prototype.slice.call(document.querySelectorAll('div[class="updated-label"]')).map(a => a.innerText).toString(),
 					);
-					console.log(newDate);
 
 					const oldDate = fs.readFileSync('./data/ammo_updated.txt').toString();
 
-
-					console.log(oldDate.toString());
 					if(newDate !== oldDate) {
 						fs.writeFile('./data/ammo_updated.txt', newDate.toString(), (err) => {
 
@@ -155,7 +152,13 @@ module.exports = {
 						await element.screenshot({ path: './data/img/image.png' });
 						await browser.close();
 					}
-					await message.channel.send(`${newDate}💥`, { files:['./data/img/image.png'] });
+					const ammoInfo = new Discord.MessageEmbed()
+						.setDescription(`${newDate}`)
+						.attachFiles(['./data/img/image.png'])
+						.setImage('attachment://image.png')
+						.setFooter('source: tarkov-tools.com', 'https://tarkov-tools.com/favicon-32x32.png');
+
+					await message.channel.send(ammoInfo);
 				}
 				catch (err) {
 					console.error(err);
@@ -164,25 +167,274 @@ module.exports = {
 			break;
 			// maps
 		case 'customs':
-			message.channel.send('https://tarkov-tools.com/maps/customs.jpg');
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://escapefromtarkov.gamepedia.com/Customs');
+
+					const raidDuration = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(3) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const playerNumbers = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(4) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+					const enemies = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const locationInfo = new Discord.MessageEmbed()
+						.setTitle('Customs')
+						.setImage('https://tarkov-tools.com/maps/customs.jpg')
+						.addField('Raid Duration', `${raidDuration}`, true)
+						.addField('Players', `${playerNumbers}`, true)
+						.addField('Enemies', `${enemies}`, true)
+						.setFooter('source: escapefromtarkov.gamepedia.com', 'https://mercury-media.cursecdn.com/avatars/0/676/635077524106421849.png');
+
+					await browser.close();
+					return message.channel.send(locationInfo);
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
 			break;
 		case 'factory':
-			message.channel.send('https://tarkov-tools.com/maps/factory.jpg');
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://escapefromtarkov.gamepedia.com/Factory');
+
+					const raidDuration = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(3) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const playerNumbers = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(4) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+					const enemies = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const locationInfo = new Discord.MessageEmbed()
+						.setTitle('Factory')
+						.setImage('https://tarkov-tools.com/maps/factory.jpg')
+						.addField('Raid Duration', `${raidDuration}`, true)
+						.addField('Players', `${playerNumbers}`, true)
+						.addField('Enemies', `${enemies}`, true)
+						.setFooter('source: escapefromtarkov.gamepedia.com', 'https://mercury-media.cursecdn.com/avatars/0/676/635077524106421849.png');
+
+					await browser.close();
+					return message.channel.send(locationInfo);
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
 			break;
 		case 'interchange':
-			message.channel.send('https://tarkov-tools.com/maps/interchange.jpg');
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://escapefromtarkov.gamepedia.com/Interchange');
+
+					const raidDuration = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(3) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const playerNumbers = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(4) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+					const enemies = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const locationInfo = new Discord.MessageEmbed()
+						.setTitle('Interchange')
+						.setImage('https://tarkov-tools.com/maps/interchange.jpg')
+						.addField('Raid Duration', `${raidDuration}`, true)
+						.addField('Players', `${playerNumbers}`, true)
+						.addField('Enemies', `${enemies}`, true)
+						.setFooter('source: escapefromtarkov.gamepedia.com', 'https://mercury-media.cursecdn.com/avatars/0/676/635077524106421849.png');
+
+					await browser.close();
+					return message.channel.send(locationInfo);
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
 			break;
 		case 'labs':
-			message.channel.send('https://tarkov-tools.com/maps/labs.jpg');
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://escapefromtarkov.gamepedia.com/The_Lab');
+
+
+					const raidDuration = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(3) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const playerNumbers = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(5) > tbody > tr:nth-child(4) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+					const enemies = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(5) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const locationInfo = new Discord.MessageEmbed()
+						.setTitle('The Lab')
+						.setImage('https://tarkov-tools.com/maps/labs.jpg')
+						.addField('Raid Duration', `${raidDuration}`, true)
+						.addField('Players', `${playerNumbers}`, true)
+						.addField('Enemies', `${enemies}`, true)
+						.setFooter('source: escapefromtarkov.gamepedia.com', 'https://mercury-media.cursecdn.com/avatars/0/676/635077524106421849.png');
+
+					await browser.close();
+					return message.channel.send(locationInfo);
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
 			break;
 		case 'reserve':
-			message.channel.send('https://tarkov-tools.com/maps/reserve.jpg');
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://escapefromtarkov.gamepedia.com/Reserve');
+
+
+					const raidDuration = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(3) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const playerNumbers = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(5) > tbody > tr:nth-child(4) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+					const enemies = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(5) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const locationInfo = new Discord.MessageEmbed()
+						.setTitle('Reserve')
+						.setImage('https://tarkov-tools.com/maps/reserve.jpg')
+						.addField('Raid Duration', `${raidDuration}`, true)
+						.addField('Players', `${playerNumbers}`, true)
+						.addField('Enemies', `${enemies}`, true)
+						.setFooter('source: escapefromtarkov.gamepedia.com', 'https://mercury-media.cursecdn.com/avatars/0/676/635077524106421849.png');
+
+					await browser.close();
+					return message.channel.send(locationInfo);
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
 			break;
 		case 'shoreline':
-			message.channel.send('https://tarkov-tools.com/maps/shoreline.jpg');
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://escapefromtarkov.gamepedia.com/Shoreline');
+
+
+					const raidDuration = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(3) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const playerNumbers = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(4) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+					const enemies = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const locationInfo = new Discord.MessageEmbed()
+						.setTitle('Shoreline')
+						.setImage('https://tarkov-tools.com/maps/shoreline.jpg')
+						.addField('Raid Duration', `${raidDuration}`, true)
+						.addField('Players', `${playerNumbers}`, true)
+						.addField('Enemies', `${enemies}`, true)
+						.setFooter('source: escapefromtarkov.gamepedia.com', 'https://mercury-media.cursecdn.com/avatars/0/676/635077524106421849.png');
+
+					await browser.close();
+					return message.channel.send(locationInfo);
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
 			break;
 		case 'woods':
-			message.channel.send('https://tarkov-tools.com/map/woods.jpg');
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://escapefromtarkov.gamepedia.com/Woods');
+
+
+					const raidDuration = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(3) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const playerNumbers = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(4) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+					const enemies = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('#va-infobox0-content > td > table:nth-child(7) > tbody > tr:nth-child(6) > td.va-infobox-content'))
+							.map(a => a.innerText).toString(),
+					);
+
+					const locationInfo = new Discord.MessageEmbed()
+						.setTitle('Woods')
+						.setImage('https://tarkov-tools.com/maps/woods.jpg')
+						.addField('Raid Duration', `${raidDuration}`, true)
+						.addField('Players', `${playerNumbers}`, true)
+						.addField('Enemies', `${enemies}`, true)
+						.setFooter('source: escapefromtarkov.gamepedia.com', 'https://mercury-media.cursecdn.com/avatars/0/676/635077524106421849.png');
+
+					await browser.close();
+					return message.channel.send(locationInfo);
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
 			break;
 		}
 
