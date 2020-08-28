@@ -11,6 +11,10 @@ module.exports = {
 				const [page] = await browser.pages();
 
 				await page.goto('https://tarkov-market.com/');
+				await page.waitForSelector('th[class="price pointer"]');
+				await page.click('th[class="price pointer"]');
+				await page.waitForSelector('div[class="nuxt-progress"]', { visible: false });
+
 
 				const items = await page.evaluate(
 					() => Array.from(document.querySelectorAll('img[alt]'),
@@ -21,19 +25,12 @@ module.exports = {
 					() => Array.prototype.slice.call(document.querySelectorAll('span[class="price-main"]')).map(a => a.innerText),
 				);
 
-				const dailyChange = await page.evaluate(
-					() => Array.prototype.slice.call(document.querySelectorAll('td[class="h-mob plus"]')).map(a => a.innerText),
-				);
-
-				for (let i = 0; i < dailyChange.length; i++) {
-					dailyChange.splice(i + 1, 1);
-				}
 
 				const lootInfo = new Discord.MessageEmbed()
 					.setDescription('**Flea Market Prices**')
-					.addField('Items', items.map(str => str.substring(0, 40)), true)
-					.addField('Price', avgPrice, true)
-					.addField('24h Change', dailyChange, true);
+					.addField('Items\n 🏷', items.map(str => str.substring(0, 40)), true)
+					.addField('Avg price (24h) \nPer slot 💰', avgPrice, true)
+					.setFooter('source: tarkov-market.com ', 'https://images.discordapp.net/avatars/675451616865943552/d854b2b1a02fbb4c4b5eea47f9840caf.png?size=512');
 
 				await browser.close();
 				return message.channel.send(lootInfo);
