@@ -47,6 +47,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'barter':
 			(async function main() {
 				try {
@@ -84,6 +85,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'keys':
 			(async function main() {
 				try {
@@ -121,6 +123,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'ammo':
 			(async function main() {
 				try {
@@ -165,6 +168,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 			// maps
 		case 'customs':
 			(async function main() {
@@ -204,6 +208,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'factory':
 			(async function main() {
 				try {
@@ -242,6 +247,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'interchange':
 			(async function main() {
 				try {
@@ -280,6 +286,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'labs':
 			(async function main() {
 				try {
@@ -319,6 +326,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'reserve':
 			(async function main() {
 				try {
@@ -358,6 +366,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'shoreline':
 			(async function main() {
 				try {
@@ -397,6 +406,7 @@ module.exports = {
 				}
 			})();
 			break;
+
 		case 'woods':
 			(async function main() {
 				try {
