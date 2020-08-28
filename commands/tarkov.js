@@ -18,11 +18,11 @@ module.exports = {
 					),
 				);
 				const avgPrice = await page.evaluate(
-					() => Array.prototype.slice.call(document.querySelectorAll('span[class="price-main"]')).map(function(x) {return x.innerText;}),
+					() => Array.prototype.slice.call(document.querySelectorAll('span[class="price-main"]')).map(a => a.innerText),
 				);
 
 				const dailyChange = await page.evaluate(
-					() => Array.prototype.slice.call(document.querySelectorAll('td[class="h-mob plus"]')).map(function(x) {return x.innerText;}),
+					() => Array.prototype.slice.call(document.querySelectorAll('td[class="h-mob plus"]')).map(a => a.innerText),
 				);
 
 				for (let i = 0; i < dailyChange.length; i++) {
