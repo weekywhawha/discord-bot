@@ -4,7 +4,8 @@ const Discord = require('discord.js');
 const puppeteer = require('puppeteer');
 module.exports = {
 	name: 'tarkov',
-	description: 'Top20 items listed on the flea market organised by avg price (24h) per slot  ',
+	description: 'Escape from Tarkov information using these specific arguments:\nmarket | barter | keys | ammo | customs | factory | interchange | labs | reserve | shoreline | woods',
+	usage: '[argument]',
 	execute(message, args) {
 		if (!args[0]) return message.reply('Please specify an argument');
 		switch(args[0]) {
