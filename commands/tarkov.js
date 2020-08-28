@@ -10,26 +10,30 @@ module.exports = {
 				const browser = await puppeteer.launch();
 				const [page] = await browser.pages();
 
-				await page.goto('https://tarkov-tools.com/loot-tier/barter-items');
+				await page.goto('https://tarkov-market.com/');
 
-				const lootItems = await page.evaluate(
+				const items = await page.evaluate(
 					() => Array.from(document.querySelectorAll('img[alt]'),
 						a => a.getAttribute('alt'),
 					),
 				);
-				const price = await page.evaluate(
-					() => document.querySelector('div[class="price-range-wrapper"]').innerText,
-
+				const avgPrice = await page.evaluate(
+					() => Array.prototype.slice.call(document.querySelectorAll('span[class="price-main"]')).map(function(x) {return x.innerText;}),
 				);
 
-				const itemPrice = await page.evaluate(
-					() => document.querySelector('div[class="barter-group-items"]').innerText,
+				const dailyChange = await page.evaluate(
+					() => Array.prototype.slice.call(document.querySelectorAll('td[class="h-mob plus"]')).map(function(x) {return x.innerText;}),
 				);
+
+				for (let i = 0; i < dailyChange.length; i++) {
+					dailyChange.splice(i + 1, 1);
+				}
 
 				const lootInfo = new Discord.MessageEmbed()
-					.setDescription('**S TIER LOOT**')
-					.addField(`${price.split('\n').splice(0, 1)}`, lootItems.slice(0, 27), true)
-					.addField('Value', itemPrice.replace(/^Value:|^Per slot:.*\n?/gm, ''), true);
+					.setDescription('**Flea Market Prices**')
+					.addField('Items', items.map(str => str.substring(0, 48)), true)
+					.addField('Price', avgPrice, true)
+					.addField('24h Change', dailyChange, true);
 
 				await browser.close();
 				return message.channel.send(lootInfo);
