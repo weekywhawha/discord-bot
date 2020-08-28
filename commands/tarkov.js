@@ -129,8 +129,14 @@ module.exports = {
 
 					await page.goto('https://tarkov-tools.com/ammo/');
 					await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
+
 					await page.waitForSelector('#root > div > div.display-wrapper > div > div.VictoryContainer > svg');
 					const element = await page.$('#root > div > div.display-wrapper > div > div.VictoryContainer > svg');
+
+					await page.evaluate(() => {
+						const removeWrapper = document.querySelector('#root > div > div.id-wrapper.id-wrapper-left');
+						removeWrapper.parentNode.removeChild(removeWrapper);
+					});
 
 					const newDate = await page.evaluate(
 						() => Array.prototype.slice.call(document.querySelectorAll('div[class="updated-label"]')).map(a => a.innerText).toString(),
