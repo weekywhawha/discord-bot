@@ -31,7 +31,7 @@ module.exports = {
 
 				const lootInfo = new Discord.MessageEmbed()
 					.setDescription('**Flea Market Prices**')
-					.addField('Items', items.map(str => str.substring(0, 48)), true)
+					.addField('Items', items.map(str => str.substring(0, 40)), true)
 					.addField('Price', avgPrice, true)
 					.addField('24h Change', dailyChange, true);
 
