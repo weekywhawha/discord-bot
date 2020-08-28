@@ -2,8 +2,9 @@
 const Discord = require('discord.js');
 const puppeteer = require('puppeteer');
 module.exports = {
-	name: 'tarkov',
-	description: 'top loot',
+	name: 'market',
+	description: 'Top20 items listed on the flea market organised by avg price (24h) per slot  ',
+	cooldown: 30,
 	execute(message) {
 		(async function main() {
 			try {
@@ -27,9 +28,10 @@ module.exports = {
 
 
 				const lootInfo = new Discord.MessageEmbed()
-					.setDescription('**Flea Market Prices**')
-					.addField('Items\n 🏷', items.map(str => str.substring(0, 40)), true)
-					.addField('Avg price (24h) \nPer slot 💰', avgPrice, true)
+					.setDescription('**Flea Market Prices 📈**')
+					.addField('\u200b\nItems\n\u200b', items.map(str => str.substring(0, 40)), true)
+					.addField('Avg price (24h) \nPer slot\n\u200b', avgPrice, true)
+					.addField('\u200b', '\u200b', false)
 					.setFooter('source: tarkov-market.com ', 'https://images.discordapp.net/avatars/675451616865943552/d854b2b1a02fbb4c4b5eea47f9840caf.png?size=512');
 
 				await browser.close();
