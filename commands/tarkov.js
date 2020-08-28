@@ -1,5 +1,5 @@
-/* eslint-disable */
 'use strict';
+const fs = require('fs');
 const Discord = require('discord.js');
 const puppeteer = require('puppeteer');
 module.exports = {
@@ -8,6 +8,7 @@ module.exports = {
 	execute(message, args) {
 		if (!args[0]) return message.reply('Please specify an argument');
 		switch(args[0]) {
+		// market data
 		case 'market':
 			(async function main() {
 				try {
@@ -118,6 +119,64 @@ module.exports = {
 					console.error(err);
 				}
 			})();
+			break;
+		case 'ammo':
+			(async function main() {
+				try {
+					const browser = await puppeteer.launch();
+					const [page] = await browser.pages();
+
+					await page.goto('https://tarkov-tools.com/ammo/');
+					await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
+					await page.waitForSelector('#root > div > div.display-wrapper > div > div.VictoryContainer > svg');
+					const element = await page.$('#root > div > div.display-wrapper > div > div.VictoryContainer > svg');
+
+					const newDate = await page.evaluate(
+						() => Array.prototype.slice.call(document.querySelectorAll('div[class="updated-label"]')).map(a => a.innerText).toString(),
+					);
+					console.log(newDate);
+
+					const oldDate = fs.readFileSync('./data/ammo_updated.txt').toString();
+
+
+					console.log(oldDate.toString());
+					if(newDate !== oldDate) {
+						fs.writeFile('./data/ammo_updated.txt', newDate.toString(), (err) => {
+
+							if (err) throw err;
+						});
+						await element.screenshot({ path: './data/img/image.png' });
+						await browser.close();
+					}
+					await message.channel.send(`${newDate}💥`, { files:['./data/img/image.png'] });
+				}
+				catch (err) {
+					console.error(err);
+				}
+			})();
+			break;
+			// maps
+		case 'customs':
+			message.channel.send('https://tarkov-tools.com/maps/customs.jpg');
+			break;
+		case 'factory':
+			message.channel.send('https://tarkov-tools.com/maps/factory.jpg');
+			break;
+		case 'interchange':
+			message.channel.send('https://tarkov-tools.com/maps/interchange.jpg');
+			break;
+		case 'labs':
+			message.channel.send('https://tarkov-tools.com/maps/labs.jpg');
+			break;
+		case 'reserve':
+			message.channel.send('https://tarkov-tools.com/maps/reserve.jpg');
+			break;
+		case 'shoreline':
+			message.channel.send('https://tarkov-tools.com/maps/shoreline.jpg');
+			break;
+		case 'woods':
+			message.channel.send('https://tarkov-tools.com/map/woods.jpg');
+			break;
 		}
 
 	},
