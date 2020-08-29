@@ -2,14 +2,34 @@ const fs = require('fs');
 const Discord = require('discord.js');
 require('dotenv').config();
 const prefix = process.env.PREFIX;
-
 const client = new Discord.Client();
+
+// Gets all directories in the main folder - Only goes 1 down.
+function getDirectories() {
+	return fs.readdirSync('./commands').filter(function subFolder(file) {
+		return fs.statSync('./commands/' + file).isDirectory();
+	});
+}
+
 client.commands = new Discord.Collection();
-
+// Reads normal .js files in the main dir
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
+// Loops through all the folders in the main dir and finds those with a .js extension
+for (const folder of getDirectories()) {
+	const folderFiles = fs.readdirSync('./commands/' + folder).filter(file => file.endsWith('.js'));
+	for (const file of folderFiles) {
+		commandFiles.push([folder, file]);
+	}
+}
+// Takes the two different command and folder lists and requires all the commands into an array which then puts it into the collection
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	let command;
+	if (Array.isArray(file)) {
+		command = require(`./commands/${file[0]}/${file[1]}`);
+	}
+	else {
+		command = require(`./commands/${file}`);
+	}
 	client.commands.set(command.name, command);
 }
 
@@ -24,6 +44,7 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	console.log(args);
 	const commandName = args.shift().toLowerCase();
+
 
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
