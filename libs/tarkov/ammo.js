@@ -2,7 +2,6 @@ import { readFileSync, writeFile } from "fs";
 import puppeteer from "puppeteer";
 import { MessageEmbed } from "discord.js";
 
-
 export const tarkovAmmo = async function main(message) {
   try {
     const browser = await puppeteer.launch();
@@ -36,17 +35,12 @@ export const tarkovAmmo = async function main(message) {
         .toString()
     );
 
-    const oldDate = readFileSync("./data/ammo_updated.txt")
-      .toString();
+    const oldDate = readFileSync("./data/ammo_updated.txt").toString();
 
     if (newDate !== oldDate) {
-      writeFile(
-        "./data/ammo_updated.txt",
-        newDate.toString(),
-        (err) => {
-          if (err) throw err;
-        }
-      );
+      writeFile("./data/ammo_updated.txt", newDate.toString(), (err) => {
+        if (err) throw err;
+      });
       await element.screenshot({ path: "./data/img/image.png" });
       await browser.close();
     }
@@ -63,4 +57,4 @@ export const tarkovAmmo = async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};

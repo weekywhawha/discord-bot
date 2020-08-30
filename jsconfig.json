@@ -1,6 +1,6 @@
 {
   "typeAcquisition": { "include": ["node"] },
-  "compilerOptions": { "checkJs": true, "baseUrl": "./"},
+  "compilerOptions": { "checkJs": true, "baseUrl": "./" },
   "exclude": ["node_modules", "**/node_modules/*"],
   "include": ["index.js", "libs/**/*.js", "commands/**/*.js"]
 }

@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer"
+import puppeteer from "puppeteer";
 import { MessageEmbed } from "discord.js";
 
 export const tarkovFactory = async function main(message) {
@@ -56,4 +56,4 @@ export const tarkovFactory = async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};

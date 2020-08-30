@@ -1,7 +1,6 @@
 import puppeteer from "puppeteer";
 import { MessageEmbed } from "discord.js";
 
-
 export const tarkovCustoms = async function main(message) {
   try {
     const browser = await puppeteer.launch();
@@ -57,4 +56,4 @@ export const tarkovCustoms = async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};

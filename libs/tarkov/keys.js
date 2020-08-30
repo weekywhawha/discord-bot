@@ -1,6 +1,5 @@
-import puppeteer from "puppeteer"
+import puppeteer from "puppeteer";
 import { MessageEmbed } from "discord.js";
-
 
 export const tarkovKeys = async function main(message) {
   try {
@@ -44,4 +43,4 @@ export const tarkovKeys = async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};

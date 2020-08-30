@@ -56,4 +56,4 @@ export const tarkovShoreline = async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};

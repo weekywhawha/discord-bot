@@ -1,15 +1,12 @@
 import puppeteer from "puppeteer";
 import { MessageEmbed } from "discord.js";
 
-     
 export const tarkovInterchange = async function main(message) {
   try {
     const browser = await puppeteer.launch();
     const [page] = await browser.pages();
 
-    await page.goto(
-      "https://escapefromtarkov.gamepedia.com/Interchange"
-    );
+    await page.goto("https://escapefromtarkov.gamepedia.com/Interchange");
 
     const raidDuration = await page.evaluate(() =>
       Array.prototype.slice
@@ -59,4 +56,4 @@ export const tarkovInterchange = async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};

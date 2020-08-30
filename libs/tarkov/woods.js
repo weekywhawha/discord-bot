@@ -56,4 +56,4 @@ export const tarkovWoods = async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};

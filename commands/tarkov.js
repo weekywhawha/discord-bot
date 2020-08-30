@@ -17,7 +17,7 @@ export default {
   usage: "[argument]",
   execute(message, args) {
     if (!args[0]) return message.reply("Please specify an argument");
-    console.log(args)
+    console.log(args);
     switch (args[0]) {
     // market data
     case "market":
@@ -28,8 +28,8 @@ export default {
       return tarkovKeys(message);
     case "ammo":
       return tarkovAmmo(message);
-      
-    // maps
+
+      // maps
     case "customs":
       return tarkovCustoms(message);
     case "factory":

@@ -1,7 +1,7 @@
-import puppeteer from "puppeteer"
+import puppeteer from "puppeteer";
 import { MessageEmbed } from "discord.js";
 
-export const tarkovBarter =async function main(message) {
+export const tarkovBarter = async function main(message) {
   try {
     const browser = await puppeteer.launch();
     const [page] = await browser.pages();
@@ -43,4 +43,4 @@ export const tarkovBarter =async function main(message) {
   } catch (err) {
     console.error(err);
   }
-}
+};
