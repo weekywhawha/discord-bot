@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	name: 'clear',
 	description: 'Purge up to 99 messages.',
 	usage: '[number]',

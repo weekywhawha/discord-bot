@@ -14,3 +14,6 @@ config.json
 
 # Webstorm
 .idea
+
+# VS Code
+.vscode
