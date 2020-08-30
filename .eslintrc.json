@@ -15,7 +15,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "indent": ["error", 2],
+    "indent": ["error", 2, {
+      "ignoredNodes": ["TemplateLiteral"]}],
     "import/prefer-default-export": 0
   }
 }
