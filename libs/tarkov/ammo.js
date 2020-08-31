@@ -35,18 +35,18 @@ export const tarkovAmmo = async function main(message) {
         .toString()
     );
 
-    const oldDate = readFileSync("./data/ammo_updated.txt").toString();
+    const oldDate = readFileSync("./data/tarkov/ammo/ammo-updated.txt").toString();
 
     if (newDate !== oldDate) {
-      writeFile("./data/ammo_updated.txt", newDate.toString(), (err) => {
+      writeFile("./data/tarkov/ammo/ammo-updated.txt", newDate.toString(), (err) => {
         if (err) throw err;
       });
-      await element.screenshot({ path: "./data/img/image.png" });
+      await element.screenshot({ path: "./data/tarkov/ammo/img/image.png" });
       await browser.close();
     }
     const ammoInfo = new MessageEmbed()
       .setDescription(`${newDate}`)
-      .attachFiles(["./data/img/image.png"])
+      .attachFiles(["./data/tarkov/ammo/img/image.png"])
       .setImage("attachment://image.png")
       .setFooter(
         "source: tarkov-tools.com",
