@@ -1,7 +1,7 @@
 import { writeFile } from "fs";
 import puppeteer from "puppeteer";
 import { MessageEmbed } from "discord.js";
-import { jsonReader } from "../utils/jsonReader.js"
+import { jsonReader } from "../utils/jsonReader.js";
 
 export const tarkovAmmo = async function main(message) {
   try {
@@ -36,25 +36,27 @@ export const tarkovAmmo = async function main(message) {
         .toString()
     );
 
-
-    jsonReader('./data/data.json', async (err, data) => {
+    jsonReader("./data/data.json", async (err, data) => {
       if (err) {
-        console.log("File read failed:", err)
-        return
+        console.log("File read failed:", err);
+        return;
       }
-      if (data.tarkov.ammo.date !== newDate){
-        data.tarkov.ammo.date = newDate
+      if (data.tarkov.ammo.date !== newDate) {
+        data.tarkov.ammo.date = newDate;
         await element.screenshot({ path: "./data/img/image.png" });
-        await browser.close();        
-        writeFile('./data/data.json', JSON.stringify(data, null, 2).concat('\n'), (err) => {
-          if (err) console.log('Error writing file:', err)
-          console.log(data.tarkov.ammo.date);
+        await browser.close();
+        writeFile(
+          "./data/data.json",
+          JSON.stringify(data, null, 2).concat("\n"),
+          (err) => {
+            if (err) console.log("Error writing file:", err);
+            console.log(data.tarkov.ammo.date);
 
-          return
-        })
+            return;
+          }
+        );
       }
-
-    })
+    });
 
     const ammoInfo = new MessageEmbed()
       .setDescription(`${newDate}`)
