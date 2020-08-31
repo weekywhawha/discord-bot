@@ -46,7 +46,7 @@ export const tarkovAmmo = async function main(message) {
         data.tarkov.ammo.date = newDate
         await element.screenshot({ path: "./data/img/image.png" });
         await browser.close();        
-        writeFile('./data/data.json', JSON.stringify(data, null, 2), (err) => {
+        writeFile('./data/data.json', JSON.stringify(data, null, 2).concat('\n'), (err) => {
           if (err) console.log('Error writing file:', err)
           console.log(data.tarkov.ammo.date);
 
