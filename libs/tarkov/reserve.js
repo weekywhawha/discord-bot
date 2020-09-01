@@ -3,7 +3,7 @@ import { MessageEmbed } from "discord.js";
 
 export const tarkovReserve = async function main(message) {
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const [page] = await browser.pages();
 
     await page.goto("https://escapefromtarkov.gamepedia.com/Reserve");
