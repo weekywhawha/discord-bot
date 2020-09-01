@@ -1,9 +1,8 @@
-import Discord from "discord.js";
 import dotenv from "dotenv";
+import Discord from "discord.js";
 import { getCommands } from "./libs/utils/commands.js";
 
-const { config } = dotenv;
-config();
+dotenv.config();
 
 const prefix = process.env.PREFIX;
 const client = new Discord.Client();
