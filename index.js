@@ -1,7 +1,6 @@
 import Discord from "discord.js";
 import { getCommands } from "./libs/utils/commands.js";
 
-
 const prefix = process.env.PREFIX;
 const client = new Discord.Client();
 
