@@ -70,7 +70,7 @@ const init = async function () {
     }
   });
 
-  client.login(process.env.TOKEN);
+  client.login();
 };
 
 init();
