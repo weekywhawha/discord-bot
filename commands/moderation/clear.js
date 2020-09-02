@@ -26,7 +26,7 @@ export default {
           messages = messages
             .filter((m) => m.author.id === filterBy)
             .array()
-            .slice(0, amount)
+            .slice(0, amount + 1)
           message.channel.bulkDelete(messages).catch((error) => console.log(error.stack))
         } else message.channel.bulkDelete(amount + 1).catch((error) => console.log(error.stack))
       })
