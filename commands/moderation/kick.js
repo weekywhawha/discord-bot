@@ -1,7 +1,7 @@
 export default {
   name: 'kick',
   description: 'Tag a member and kick them',
-  guildOnly: "true",
+  guildOnly: 'true',
   usage: '[member-tag] [reason(optional)]',
   async execute(message, args) {
     if (!message.member.roles.cache.some((r) => r.name === 'Admin'))

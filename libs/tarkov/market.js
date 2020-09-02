@@ -3,8 +3,8 @@ import { MessageEmbed } from 'discord.js'
 
 export const tarkovMarket = async function (message) {
   try {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-    const [page] = await browser.pages();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+    const [page] = await browser.pages()
 
     await page.goto('https://tarkov-market.com/')
     await page.waitForSelector('th[class="price pointer"]')

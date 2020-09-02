@@ -3,8 +3,8 @@ import { MessageEmbed } from 'discord.js'
 
 export const tarkovShoreline = async function main(message) {
   try {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-    const [page] = await browser.pages();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+    const [page] = await browser.pages()
 
     await page.goto('https://escapefromtarkov.gamepedia.com/Shoreline')
 
