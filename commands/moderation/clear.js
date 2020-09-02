@@ -13,7 +13,7 @@ export default {
     if (!amount && !user)
       return message.reply('you must specify a user and amount, or just an amount, of messages to purge!')
 
-    if (amount <= 1 || amount >= 100)
+    if (amount < 1 || amount >= 100)
       return message.reply("you need to input a number between 1 and 100.");
 
     message.channel.messages
