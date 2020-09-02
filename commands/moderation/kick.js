@@ -1,7 +1,8 @@
 export default {
   name: 'kick',
-  description: 'Tag a member and kick them (but not really).',
-  guildOnly: true,
+  description: 'Tag a member and kick them',
+  guildOnly: "true",
+  usage: '[member-tag] [reason(optional)]',
   async execute(message, args) {
     if (!message.member.roles.cache.some((r) => r.name === 'Admin'))
       return message.reply('you do not have permission to use this command')
