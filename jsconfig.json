@@ -3,9 +3,12 @@
     "include": ["node"]
   },
   "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2020",
     "checkJs": true,
     "baseUrl": "./"
   },
   "exclude": ["node_modules", "**/node_modules/*"],
-  "include": ["index.js", "libs/**/*.js", "commands/**/*.js"]
+  "include": ["index.js", "libs/**/*.js", "commands/**/*.js", "utils/**/*.js"]
 }
