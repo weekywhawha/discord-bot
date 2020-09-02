@@ -1,8 +1,8 @@
 export default {
-  name: "ping",
+  name: 'ping',
   cooldown: 5,
-  description: "Ping!",
+  description: 'Ping!',
   execute(message) {
-    message.channel.send("Pong.");
+    message.channel.send('Pong.')
   },
-};
+}

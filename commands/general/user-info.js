@@ -1,9 +1,7 @@
 export default {
-  name: "user-info",
-  description: "Display info about yourself.",
+  name: 'user-info',
+  description: 'Display info about yourself.',
   execute(message) {
-    message.channel.send(
-      `Your username: ${message.author.username}\nYour ID: ${message.author.id}`
-    );
+    message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`)
   },
-};
+}
