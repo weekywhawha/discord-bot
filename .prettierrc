@@ -1,13 +1,13 @@
 {
-    "bracketSpacing": true,
-    "printWidth": 120,
-    "semi": false,
-    "singleQuote": true,
-    "endOfLine": "auto",
-    "overrides": [
-      {
-        "files": ".prettierrc",
-        "options": { "parser": "json" }
-      }
-    ]
-  }
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "semi": false,
+  "singleQuote": true,
+  "endOfLine": "auto",
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": { "parser": "json" }
+    }
+  ]
+}
