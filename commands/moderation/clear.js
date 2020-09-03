@@ -1,6 +1,6 @@
 export default {
   name: 'clear',
-  description: 'Purge up to 100 messages.',
+  description: 'Purge up to 99 messages.',
   usage: '[number]',
   execute(message) {
     const user = message.mentions.users.first()
@@ -13,7 +13,7 @@ export default {
     if (!amount && !user)
       return message.reply('you must specify a user and amount, or just an amount, of messages to purge!')
 
-    if (amount < 1 || amount >= 100) return message.reply('you need to input a number between 1 and 100.')
+    if (amount < 1 || amount >= 100) return message.reply('you need to input a number between 1 and 99.')
 
     message.channel.messages
       .fetch({
