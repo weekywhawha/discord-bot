@@ -14,7 +14,7 @@ export const getCommands = async function () {
   const commandFiles = files.filter((file) => file.endsWith('.js'))
 
   for (const file of commandFiles) {
-    const command = await import(`file:///${path.resolve(__dirname, file)}`).then((m) => m.default)
+    const command = await import(`file://${path.resolve(__dirname, file)}`).then((m) => m.default)
     commands.set(command.name, command)
   }
   return commands
