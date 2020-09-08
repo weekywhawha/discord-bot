@@ -7,7 +7,7 @@ const sheets = google.sheets({ version: 'v4', auth: APIKey })
 
 export default {
   name: 'dual',
-  description: 'dual universe',
+  description: 'information about Dual Universe ores, please input at least 4 characters for the search',
   usage: '[argument]',
   async execute(message, args) {
     const searchInput = args[0]

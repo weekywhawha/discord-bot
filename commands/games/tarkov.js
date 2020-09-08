@@ -14,8 +14,8 @@ import { tarkovSearch } from '../../libs/tarkov/search.js'
 export default {
   name: 'tarkov',
   description:
-    'Escape from Tarkov information using these specific arguments:\nmarket | barter | keys | ammo | customs | factory | interchange | labs | reserve | shoreline | woods',
-  usage: '[argument]',
+    'Escape from Tarkov information using these specific arguments:\nmarket | barter | keys | ammo | search | customs | factory | interchange | labs | reserve | shoreline | woods',
+  usage: '[argument] [argument(if needed)]',
   execute(message, args) {
     if (!args[0]) return message.reply('Please specify an argument')
     switch (args[0]) {
