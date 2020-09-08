@@ -33,12 +33,12 @@ export default {
     const oreInfo = new MessageEmbed()
       .setTitle(`${oreName}`)
       .addField(
-        'Items',
+        'Planets',
         planets.map((str) => str.substring()),
         true
       )
       .addField('\u200b', '\u200b', true)
-      .addField('Depth', `${oreValues.toString().replace(/,/g, ' \u200b\n')}`, true)
+      .addField('Depth (m)', `${oreValues.toString().replace(/,/g, ' \u200b\n')}`, true)
       .addField('\u200b', '\u200b', false)
       .setFooter('source: docs.google.com', 'https://ssl.gstatic.com/docs/common/product/sheets_app_icon1.png')
 
