@@ -9,6 +9,7 @@ import { tarkovLabs } from '../../libs/tarkov/labs.js'
 import { tarkovReserve } from '../../libs/tarkov/reserve.js'
 import { tarkovShoreline } from '../../libs/tarkov/shoreline.js'
 import { tarkovWoods } from '../../libs/tarkov/woods.js'
+import { tarkovSearch } from '../../libs/tarkov/search.js'
 
 export default {
   name: 'tarkov',
@@ -27,6 +28,8 @@ export default {
         return tarkovKeys(message)
       case 'ammo':
         return tarkovAmmo(message)
+      case 'search':
+        return tarkovSearch(message, args)
 
       // maps
       case 'customs':
