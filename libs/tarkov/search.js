@@ -4,15 +4,20 @@ import { MessageEmbed } from 'discord.js'
 export const tarkovSearch = async function (message, args) {
   try {
     const searchInput = args.slice(1).join(' ')
+
     if (!searchInput || searchInput.length < 3) return message.reply(`invalid search parameter`)
+
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
     const [page] = await browser.pages()
 
     await page.goto('https://tarkov-market.com/')
 
     const input = await page.waitForSelector('div[class="search"]')
+
     await page.click('div[class="search"]')
+
     await input.type(searchInput)
+
     await page.waitForSelector('th[class="price pointer"]')
     await page.click('th[class="price pointer"]')
     await page.waitForSelector('div[class="nuxt-progress"]')

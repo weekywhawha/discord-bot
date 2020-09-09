@@ -11,7 +11,9 @@ export default {
   usage: '[argument]',
   async execute(message, args) {
     const searchInput = args[0].toLowerCase()
+
     if (!searchInput || searchInput.length < 4) return message.reply(`invalid search parameter`)
+
     const request = {
       spreadsheetId: '14iHVub5lhpK4_IeshhHALnRyKDbob14npwo7OPCFvwM',
       range: 'A2:V37',
