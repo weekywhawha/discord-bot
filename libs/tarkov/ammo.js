@@ -1,7 +1,7 @@
 import { writeFile } from 'fs'
 import puppeteer from 'puppeteer'
 import { MessageEmbed } from 'discord.js'
-import { jsonReader } from '../utils/jsonReader.js'
+import { jsonReader } from '../utils/json-reader.js'
 
 export const tarkovAmmo = async function main(message) {
   try {
