@@ -47,13 +47,11 @@ export default {
     }
 
     const info = stream.data.data[0]
-    console.log(info)
     const gameId = info.game_id
     const name = info.user_name
     const title = info.title
     const viewers = info.viewer_count
     const thumbnail = info.thumbnail_url.replace(`{width}`, '640').replace(`{height}`, '360')
-    console.log(thumbnail)
 
     const game = await axios({
       method: 'GET',
@@ -66,7 +64,6 @@ export default {
         id: gameId,
       },
     })
-    console.log(game.data)
 
     if (!game.data.data.length) {
       return console.log('game data is unreachable')
@@ -74,7 +71,6 @@ export default {
 
     const artwork = game.data.data[0].box_art_url.replace(`{width}`, '285').replace(`{height}`, '380')
     const gameName = game.data.data[0].name
-    console.log(artwork)
 
     const twitchInfo = new MessageEmbed()
       .setTitle(`🔴 ${name} is live`)

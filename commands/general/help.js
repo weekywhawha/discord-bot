@@ -10,7 +10,6 @@ export default {
   execute: async (message, args) => {
     const data = []
     const commands = await getCommands()
-    console.log('commands', message)
 
     if (!args.length) {
       data.push("Here's a list of all my commands:")
