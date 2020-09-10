@@ -5,8 +5,8 @@ import { jsonReader } from '../utils/json-reader.js'
 
 export const tarkovAmmo = async function main(message) {
   try {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-    const [page] = await browser.pages();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+    const [page] = await browser.pages()
 
     await page.goto('https://tarkov-tools.com/ammo/')
     await page.setViewport({

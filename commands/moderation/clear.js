@@ -1,6 +1,6 @@
 export default {
   name: 'clear',
-  description: 'Purge up to 99 messages.',
+  description: 'Delete up to 99 messages.',
   usage: '[number]',
   execute(message) {
     const user = message.mentions.users.first()
@@ -8,12 +8,17 @@ export default {
       ? parseInt(message.content.split(' ')[1])
       : parseInt(message.content.split(' ')[2])
 
-    if (!amount) return message.reply('Must specify an amount to delete!')
+    if (!amount) {
+      return message.reply('Must specify an amount to delete!')
+    }
 
-    if (!amount && !user)
+    if (!amount && !user) {
       return message.reply('you must specify a user and amount, or just an amount, of messages to purge!')
+    }
 
-    if (amount < 1 || amount >= 100) return message.reply('you need to input a number between 1 and 99.')
+    if (amount < 1 || amount >= 100) {
+      return message.reply('you need to input a number between 1 and 99.')
+    }
 
     message.channel.messages
       .fetch({

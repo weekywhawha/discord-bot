@@ -5,7 +5,9 @@ export const tarkovSearch = async function (message, args) {
   try {
     const searchInput = args.slice(1).join(' ')
 
-    if (!searchInput || searchInput.length < 3) return message.reply(`invalid search parameter`)
+    if (!searchInput || searchInput.length < 3) {
+      return message.reply(`invalid search parameter`)
+    }
 
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
     const [page] = await browser.pages()

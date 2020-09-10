@@ -4,8 +4,11 @@ import { join, basename } from 'path'
 async function* dirs(path = '.') {
   yield path
   for (const dirent of await readdir(path, { withFileTypes: true }))
-    if (dirent.isDirectory()) yield* dirs(join(path, dirent.name))
-    else yield join(path, dirent.name)
+    if (dirent.isDirectory()) {
+      yield* dirs(join(path, dirent.name))
+    } else {
+      yield join(path, dirent.name)
+    }
 }
 
 async function* empty() {
@@ -20,7 +23,10 @@ async function toArray(iter = empty()) {
 
 // eslint-disable-next-line no-unused-vars
 async function search(iter = empty(), test = (_) => false) {
-  for await (const p of iter) if (test(p)) return p
+  for await (const p of iter)
+    if (test(p)) {
+      return p
+    }
 }
 
 async function searchByName(iter = empty(), query = '') {

@@ -7,12 +7,14 @@ const sheets = google.sheets({ version: 'v4', auth: APIKey })
 
 export default {
   name: 'dual',
-  description: 'information about Dual Universe ores, please input at least 4 characters for the search',
+  description: 'Information about Dual Universe ores, please input at least 4 characters for the search.',
   usage: '[argument]',
   async execute(message, args) {
     const searchInput = args[0].toLowerCase()
 
-    if (!searchInput || searchInput.length < 4) return message.reply(`invalid search parameter`)
+    if (!searchInput || searchInput.length < 4) {
+      return message.reply(`invalid search parameter`)
+    }
 
     const request = {
       spreadsheetId: '14iHVub5lhpK4_IeshhHALnRyKDbob14npwo7OPCFvwM',
@@ -26,7 +28,9 @@ export default {
       element.toString().toLocaleLowerCase().includes(searchInput)
     )
 
-    if (!findElement) return message.reply('your search did not match any item.')
+    if (!findElement) {
+      return message.reply('your search did not match any item.')
+    }
 
     const oreName = findElement[0]
     const oreValues = findElement.slice(7)

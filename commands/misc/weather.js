@@ -3,12 +3,16 @@ import { MessageEmbed } from 'discord.js'
 
 export default {
   name: 'weather',
-  description: 'Checks weather forecast',
+  description: 'Checks weather forecast for a specific location.',
   usage: '[location]',
   execute(message, args) {
     weather.find({ search: args.join(''), degreeType: 'C' }, (error, result) => {
-      if (error) return message.reply('Please specify a location.')
-      if (result === undefined || result.length === 0) return message.reply('Invalid location.')
+      if (error) {
+        return message.reply('Please specify a location.')
+      }
+      if (result === undefined || result.length === 0) {
+        return message.reply('Invalid location.')
+      }
 
       const current = result[0].current
       const location = result[0].location
