@@ -80,6 +80,7 @@ export default {
       .addField('Viewers', `${viewers} viewers`, true)
       .setImage(`${thumbnail}`)
       .setURL(`https://www.twitch.tv/${name}`)
+      .setFooter('source: twitch.tv', 'https://static.twitchcdn.net/assets/favicon-32-d6025c14e900565d6177.png')
 
     return message.channel.send(twitchInfo)
   },
