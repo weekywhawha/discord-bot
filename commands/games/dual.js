@@ -18,7 +18,7 @@ export default {
 
     const request = {
       spreadsheetId: '14iHVub5lhpK4_IeshhHALnRyKDbob14npwo7OPCFvwM',
-      range: 'A2:V37',
+      range: 'A3:V37',
       majorDimension: 'COLUMNS',
     }
 
